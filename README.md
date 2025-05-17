@@ -50,6 +50,14 @@ pode logar no sistema utilizando o e-mail e senha abaixo, entretanto para criar 
 
 Encontre outras imagens e vídeo passando pelo sistema na pasta `documentacao/projeto-imagens-video`
 
+## 🧑‍💻 Integrantes
+[Arthur Osaka Hoshino](https://github.com/ArthurHoshino)<br/>
+[Bruno Koji Nakao](https://github.com/Bruno-235789)<br/>
+[Fernando Manso Isaac](https://github.com/Fernando-MI)<br/>
+[Guilherme Silva Piantamar](https://github.com/gpiantamar)<br/>
+[João Henrique Guimarães da Silva](https://github.com/joao591)<br/>
+[Nikolas Dalton Perassoli Varella](https://github.com/Nikolas-Dalton)<br/>
+
 ---
 Estilização e imagens por:<br/>
 [Themesine](https://www.themesine.com/)<br/>
