@@ -44,11 +44,15 @@ pode logar no sistema utilizando o e-mail e senha abaixo, entretanto para criar 
 |:------|------:|
 |teste@email.com|qwer|
 
-### Imagens do projeto
-![Tela inicial](/documentacao/projeto-imagens-video/1-main.png?raw=true)
-![Dashboard](/documentacao/projeto-imagens-video/5-dashboard.png?raw=true)
+### ⚙️ Funcionalidades do Sistema
+Atualmente, empregar tecnologia nas empresas é bastante importante para que ela se mantenha competitiva no mercado, entretanto ainda existem aquelas que não possuem os recursos necessários para fazer isso. Pensando nisso, o EstoqueHub é uma solução simples para o gerenciamento de estoque.<br><br>
+O EstoqueHub é um sistema Web, ou seja, não requer que o usuário instale quaisquer programas para utilizar, basta criar uma conta e acessar por meio do navegador. Dentro do sistema, o usuário é capaz de **incluir** e **alterar** produtos, definindo um nome, descrição, seu preço unitário e a quantidade em estoque. Além disso também é possível **deletar** um produto no caso de não estar mais disponível no estabelecimento.
 
-Encontre outras imagens e vídeo passando pelo sistema na pasta `documentacao/projeto-imagens-video`
+<!-- ### Imagens do projeto
+![Tela inicial](/documentacao/projeto-imagens-video/1-main.png?raw=true)
+![Dashboard](/documentacao/projeto-imagens-video/5-dashboard.png?raw=true) -->
+
+<!-- Encontre outras imagens e vídeo passando pelo sistema na pasta `documentacao/projeto-imagens-video` -->
 
 ## 🧑‍💻 Integrantes
 [Arthur Osaka Hoshino](https://github.com/ArthurHoshino)<br/>

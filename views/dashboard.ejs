@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/dashboard-style.css" />
     <link rel="stylesheet" href="assets/css/pagination.css" />
+    <link rel="stylesheet" href="assets/css/mystyle.css">
     <link
       rel="stylesheet"
       href="https://unpkg.com/nice-forms.css@0.1.7/dist/nice-forms.css"
@@ -13,7 +14,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
     />
-    <title>Cabeleleila Leila</title>
+    <title>Estoque Hub</title>
   </head>
   <body>
     <div class="app-container">
@@ -52,7 +53,7 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="/agenda">
+            <a href="/dashboardAdicionarProduto">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -69,27 +70,7 @@
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-              <span>Agendar</span>
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="/historico">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-pie-chart"
-              >
-                <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
-                <path d="M22 12A10 10 0 0 0 12 2v10z" />
-              </svg>
-              <span>Histórico</span>
+              <span>Adicionar Produto</span>
             </a>
           </li>
         </ul>
@@ -103,31 +84,45 @@
           </form>
         </div>
         <div class="app-content-actions"></div>
-        
+
         <div class="products-area-wrapper tableView">
             <% if (itens.length !== 0) { %>
                 <div class="products-header">
                     <div class="product-cell">
-                      ID
+                        Nome do produto
                     </div>
                     <div class="product-cell">
-                        Data do agendamento
+                        Descrição
                     </div>
                     <div class="product-cell">
-                        Status
+                        Preço Unitário
+                    </div>
+                    <div class="product-cell">
+                        Quantidade
+                    </div>
+                    <div class="product-cell">
+                        Ações
                     </div>
                 </div>
                 <% itens.forEach(element => { %>
                     <div class="products-row">
-                        <div class="product-cell category"><span class="cell-label">ID:</span><%= element.idAgenda %></div>
-                        <div class="product-cell category"><span class="cell-label">Category:</span><%= element.data_atendimento %></div>
-                        <div class="product-cell status-cell">
-                            <span class="cell-label">Status:</span>
-                            <span class="status <%= element.ativo === 1 ? 'active' : 'disabled' %>"><%= element.ativo === 1 ? 'Ativo' : 'Concluído' %></span>
+                        <div class="product-cell category"><span class="cell-label">Nome do produto:</span><%= element.CDPRODNOME %></div>
+                        <div class="product-cell category"><span class="cell-label">Descrição:</span><%= element.CDPRODDESC %></div>
+                        <div class="product-cell category"><span class="cell-label">Preço:</span>R$ <%= element.CDPRODPRECO %></div>
+                        <div class="product-cell category"><span class="cell-label">Quantidade:</span><%= element.CDESTQTDPROD %></div>
+
+                        <div class="product-cell category">
+                            <span class="historico-actions">
+                                <a href="/dashboardEditarProduto?produtoId=<%=element.CDPRODID%>">Editar</a>
+                            </span>
+
+                            <span class="historico-actions">
+                                <a href="/dashboardDeletarProduto?produtoId=<%=element.CDPRODID%>">Deletar</a>
+                            </span>
                         </div>
                     </div>
                 <% }); %>
-                
+
                 <div class="container">
                     <div class="pagination p1">
                         <ul>
@@ -136,9 +131,9 @@
                             <% } else { %>
                                 <a href="#"><li><</li></a>
                             <% } %>
-                            
+
                             <a href="#" class="is-active"><li><%= paginaAtual %></li></a>
-    
+
                             <% if (paginaAtual < totalPaginas) { %>
                                 <a href="/dashboard?pagina=<%= paginaAtual + 1 %>"><li>></li></a>
                             <% } else { %>
@@ -152,7 +147,7 @@
             <% } else { %>
                 <div class="products-header"></div>
                 <div class="products-row">
-                    <div class="product-cell category">Nenhum agendamento encontrado</div>
+                    <div class="product-cell category">Nenhum produto encontrado</div>
                 </div>
             <% } %>
         </div>
