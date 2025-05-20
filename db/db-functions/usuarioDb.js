@@ -6,7 +6,7 @@ export async function createUsuario(data) {
     const values = Object.keys(data).map(key => `?`).join(", ")
 
     const [result] = await pool.query(`
-    INSERT INTO Usuario(${query})
+    INSERT INTO CDUSUARIO(${query})
     VALUES(${values})
     `, parametros)
 
@@ -24,8 +24,8 @@ export async function getUsuarioById(idUsuario) {
 
 export async function getUsuarioByEmail(email) {
     const [row] = await pool.query(`
-    SELECT * FROM Usuario
-    WHERE email = ?    
+    SELECT CDUSID, CDUSEMAIL, CDUSSENHA FROM CDUSUARIO
+    WHERE CDUSEMAIL = ?
     `, [email])
 
     return row

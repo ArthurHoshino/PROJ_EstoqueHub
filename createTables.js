@@ -17,7 +17,7 @@ async function executarSQL(filePath) {
         const sqlContent = fs.readFileSync(filePath, 'utf8')
         await connection.query(sqlContent)
 
-        console.log('Tabelas criadas com sucesso!')
+        console.log('Banco criado com sucesso!')
     } catch (error) {
         console.log('Erro ao executar o arquivo SQL:', error)
     } finally {
@@ -25,4 +25,4 @@ async function executarSQL(filePath) {
     }
 }
 
-executarSQL('./db/tables.sql')
+executarSQL('./db/CreateEstoqueHubDb.sql')
