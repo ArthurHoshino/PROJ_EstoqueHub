@@ -1,5 +1,4 @@
 import express from 'express'
-import moment from 'moment'
 
 import { getUsuarioByEmail, createUsuario } from '../db/db-functions/usuarioDb.js'
 import { getProdutosFiltro, inserirProduto, atualizarProduto, deletarProduto } from '../db/db-functions/produtoDb.js'
@@ -195,9 +194,14 @@ paginaRouter.post('/dashboardAdicionarProduto', async (req, res, next) => {
         if (prodData.CDPRODPRECO == '') {
             errorMessage.msgError = 'Preencha o preço unitário do produto'
             return res.render("dashboardAdicionarProduto", errorMessage);
+        } else {
+            prodData.CDPRODPRECO = prodData.CDPRODPRECO.replace(",", ".");
         }
         if (estoqueData.CDESTQTDPROD == '') {
             errorMessage.msgError = 'Preencha a quantidade do produto'
+            return res.render("dashboardAdicionarProduto", errorMessage);
+        } else if (parseInt(estoqueData.CDESTQTDPROD) < 0) {
+            errorMessage.msgError = 'Insira uma quantidade válida (maior ou igual a zero)'
             return res.render("dashboardAdicionarProduto", errorMessage);
         }
 

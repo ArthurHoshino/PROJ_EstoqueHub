@@ -73,6 +73,32 @@ CREATE TABLE IF NOT EXISTS `mydb`.`sessions` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Add test data
+-- -----------------------------------------------------
+INSERT INTO CDUSUARIO (CDUSNOME, CDUSEMAIL, CDUSSENHA) VALUES ('Daltora', 'daltora@teste.com.br', 'Qw!2erty');
+
+INSERT INTO CDPRODUTO (CDPRODNOME, CDPRODDESC, CDPRODPRECO)
+VALUES ('Celular', 'Smasnug', 750),
+('Lápis', 'Fabercastell', 12.5),
+('Garrafa', 'Inox', 50),
+('Mouse', 'Gaymer', 80),
+('Teclado', 'Logitech', 350),
+('Carro', 'Fiat Uno Quadrado', 10000),
+('Daltão', 'É o melhor', 0.01),
+('Mochila', 'Da DSIN', 8000);
+
+INSERT INTO CDESTOQUE (CDESTUSUARIOID, CDESTPRODID, CDESTQTDPROD)
+VALUES (1, 1, 4),
+(1, 2, 50),
+(1, 3, 10),
+(1, 4, 20),
+(1, 5, 20),
+(1, 6, 3),
+(1, 7, 1),
+(1, 8, 2);
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

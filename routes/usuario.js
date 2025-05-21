@@ -1,5 +1,5 @@
 import express from "express";
-import { createUsuario, getUsuarioByEmail } from "../db/db-functions/usuarioDb.js";
+import { getUsuarioByEmail } from "../db/db-functions/usuarioDb.js";
 import { sessionStore } from "../db/db.js";
 import dotenv from 'dotenv'
 

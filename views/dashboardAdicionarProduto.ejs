@@ -126,10 +126,10 @@
       </div>
 
     </div>
-    <script src="utils/global.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
           const item = JSON.parse('<%- JSON.stringify(item) %>');
+          const precoInput = document.getElementById('fprodPreco');
 
           if (Object.keys(item).length != 0) {
               document.getElementById('fprodId').value = item.CDPRODID;
@@ -141,7 +141,22 @@
               document.getElementById('acao-prod-title').innerHTML = "Editar Produto";
               document.getElementById('acao-prod-span').innerHTML = "Editar Produto";
           }
+
+          precoInput.addEventListener('input', function(e) {
+              // Remove tudo que não for número usando regex
+              let valor = e.target.value.replace(/\D/g, '');
+
+              // Limita a 10 dígitos
+              valor = valor.substring(0, 10);
+
+              // Separa parte inteira e decimal usando regex
+              const regex = /^(\d+)(\d{2})$/;
+              valor = valor.replace(regex, '$1,$2');
+
+              e.target.value = valor;
+          });
         })
     </script>
+    <script src="utils/global.js"></script>
   </body>
 </html>

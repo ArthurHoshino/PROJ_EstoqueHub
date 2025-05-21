@@ -4,7 +4,6 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 
-import servicosRouter from './routes/servicos.js'
 import usuarioRouter from './routes/usuario.js'
 import paginaRouter from './routes/paginas.js'
 import { sessionStore } from './db/db.js'
@@ -39,7 +38,6 @@ app.use(session({
 }))
 
 // Rotas
-app.use(servicosRouter)
 app.use(usuarioRouter)
 app.use(paginaRouter)
 

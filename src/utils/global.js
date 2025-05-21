@@ -4,11 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuClose = document.getElementById('mobile-menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
     const overlay = document.getElementById('overlay');
-    const telefoneInput = document.getElementById("ftelefone");
-    const precoInput = document.getElementById('fprodPreco');
     const nomeInput = document.getElementById('fnome');
     const senhaInput = document.getElementById('fsenha');
     const confirmarSenhaInput = document.getElementById('fconfirmar');
+    const telefoneInput = document.getElementById("ftelefone");
 
     function openMenu() {
         mobileMenu.classList.add('active');
@@ -74,11 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return '';
     }
-
-    precoInput.addEventListener('input', function(e) {
-        let valorFormatado = formatarPrecoRegex(e.target.value);
-        e.target.value = valorFormatado;
-    });
 
     nomeInput.addEventListener('input', function(e) {
         let valor = e.target.value.replace(/^[^\s].*/, '');
