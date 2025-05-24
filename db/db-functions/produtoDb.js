@@ -1,4 +1,6 @@
 import { pool } from "../db.js";
+import { ProdutoEnum } from "../../src/enums/ProdutoEnum.js";
+import { EstoqueEnum } from "../../src/enums/EstoqueEnum.js";
 
 
 export async function getProdutosFiltro(CDUSID, pagina, porPagina, offset, filtroOpt = null, filtroValor = null) {
@@ -6,7 +8,25 @@ export async function getProdutosFiltro(CDUSID, pagina, porPagina, offset, filtr
         itens: [],
         totalPaginas: 0
     }
-    const whereQry = filtroOpt != null ? ` AND ${filtroOpt} = ${filtroValor}` : "";
+
+    let whereQry = "";
+    if (filtroOpt !== null) {
+        switch (filtroOpt) {
+            case '1':
+                whereQry = ` AND ${ProdutoEnum.NOME} LIKE '%${filtroValor}%'`;
+                break;
+            case '2':
+                whereQry = ` AND ${ProdutoEnum.DESCRICAO} LIKE '%${filtroValor}%'`;
+                break;
+            case '3':
+                whereQry = ` AND ${ProdutoEnum.PRECO} = ${parseFloat(filtroValor.replace(',', '.'))}`;
+                break;
+            case '4':
+                whereQry = ` AND ${EstoqueEnum.QUANTIDADE} = ${parseInt(filtroValor)}`;
+                break;
+        }
+    }
+
     const queryTotalItens = `SELECT COUNT(*) AS total FROM CDESTOQUE
     INNER JOIN CDPRODUTO ON CDPRODID = CDESTPRODID
     WHERE CDESTUSUARIOID = ?

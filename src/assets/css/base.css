@@ -57,37 +57,28 @@ img {
 
 /* Botões */
 .normal-button {
-    display: inline-block;
-    background-color: #3498db;
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
     border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    text-align: center;
-}
-/* botão especifico do perfil  */
-.perfil-button.normal-button {
-  width: 500px; 
-  display: block;       
-  margin: 20px auto 0;   
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(52, 152, 219, 0.3);
 }
 
 .botoes-footer {
-  margin-top: auto;
-  display: flex;
-  justify-content: center; 
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .normal-button:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-}
-
-.normal-button:active {
-    transform: translateY(0);
+    background: linear-gradient(135deg, #2980b9, #2471a3);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 12px rgba(41, 128, 185, 0.3);
 }
 
 /* Links animados no menu */
@@ -208,39 +199,58 @@ aside a:hover {
 
 /* Formulário de Registro */
 .geral-form {
-  background-color: #fafafa;
-  padding: 36px 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 600px;   
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    background-color: #fafafa;
+    padding: 36px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .form-group-senha {
-  display: flex;
-  flex-direction: column;
-  gap: 30px; 
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
-
 
 .form-container {
-  display: flex;
-  justify-content: center;
-  gap: 30px;        
-  flex-wrap: wrap;   
-  margin: 50px auto;
-  max-width: 1700px; 
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 50px auto;
+    max-width: 1700px;
 }
 
-  .campo-readonly {
-    background-color: #f0f0f0; 
-    color: #666;              
-    opacity: 0.7;            
-    cursor: not-allowed;      
-  }
+.campo-readonly {
+    background-color: #f0f0f0;
+    color: #666;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.normal-button-2 {
+    background: linear-gradient(135deg, #ffffff, #f1f1f1);
+    color: #3498db;
+    font-size: 1rem;
+    padding: 15px 35px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.normal-button-2:hover {
+    background: linear-gradient(135deg, #f1f1f1, #ffffff);
+    color: #2980b9;
+    border-radius: 8px;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+}
+
+
 
 @media (max-width: 991px) {
     .geral-form {
