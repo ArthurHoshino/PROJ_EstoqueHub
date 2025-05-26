@@ -15,8 +15,8 @@ export async function createUsuario(data) {
 
 export async function getUsuarioById(idUsuario) {
     const [rows] = await pool.query(`
-        SELECT * FROM Usuario
-        WHERE idUsuario = ?
+        SELECT CDUSNOME, CDUSEMAIL, CDUSCEL FROM CDUSUARIO
+        WHERE CDUSID = ?
     `, [idUsuario])
 
     return rows[0]
@@ -36,19 +36,17 @@ export async function updateUsuario(idUsuario, data) {
     const parametros = [...Object.values(data), idUsuario]
 
     const result = await pool.query(`
-    UPDATE Usuario
-    SET ${query}, updatedAt = NOW()
-    WHERE idUsuario = ?
-    `, parametros)
+    UPDATE CDUSUARIO
+    SET ${query}, CDUSDTATUALIZADO = NOW()
+    WHERE CDUSID = ?`, parametros);
 
     return result
 }
 
 export async function deletarUsuario(data) {
     const result = await pool.query(`
-    UPDATE Usuario
-    SET deletado = 1, updatedAt = NOW()
-    WHERE idUsuario = ?
+    DELETE FROM CDUSUARIO
+    WHERE CDUSID = ?
     `, [data.idUsuario])
 
     return result

@@ -32,7 +32,9 @@ Agora vamos criar as tabelas do nosso banco (se preferir, o arquivo SQL com algu
 ```bash
 node .\createTables.js
 ```
-Você deve receber uma mensagem dizendo `Tabelas criadas com sucesso!`
+Você deve receber uma mensagem dizendo `Tabelas criadas com sucesso!`. Se der algum erro pode ser:
+* Configuração do servidor MySQL
+* Você terá que criar somente o banco `mydb` na mão, a criação das tabelas ainda funcionará
 
 Com isso feito, basta rodar o projeto, utilizando:
 ```bash
@@ -42,7 +44,7 @@ E o projeto estará disponível em `http://127.0.0.1:8080`. Para fins de teste, 
 pode logar no sistema utilizando o e-mail e senha abaixo, entretanto para criar um novo usuário é necessário colocar uma senha mais forte.
 | E-mail | Senha |
 |:------|------:|
-|teste@email.com|qwer|
+|teste@email.com|Qw!2erty|
 
 ### ⚙️ Funcionalidades do Sistema
 Atualmente, empregar tecnologia nas empresas é bastante importante para que ela se mantenha competitiva no mercado, entretanto ainda existem aquelas que não possuem os recursos necessários para fazer isso. Pensando nisso, o EstoqueHub é uma solução simples para o gerenciamento de estoque.<br><br>

@@ -1,131 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="pt-BR">
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/dashboard-style.css" />
-    <link rel="stylesheet" href="assets/css/registration-style.css">
-    <link rel="stylesheet" href="assets/css/mystyle.css">
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/nice-forms.css@0.1.7/dist/nice-forms.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
-    />
-    <title>Produto</title>
-  </head>
-  <body>
-    <div class="app-container">
-      <div class="sidebar">
-        <div class="sidebar-header">
-          <div class="app-icon">
-            <a href="/">
-              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fill="currentColor"
-                  d="M507.606 371.054a187.217 187.217 0 00-23.051-19.606c-17.316 19.999-37.648 36.808-60.572 50.041-35.508 20.505-75.893 31.452-116.875 31.711 21.762 8.776 45.224 13.38 69.396 13.38 49.524 0 96.084-19.286 131.103-54.305a15 15 0 004.394-10.606 15.028 15.028 0 00-4.395-10.615zM27.445 351.448a187.392 187.392 0 00-23.051 19.606C1.581 373.868 0 377.691 0 381.669s1.581 7.793 4.394 10.606c35.019 35.019 81.579 54.305 131.103 54.305 24.172 0 47.634-4.604 69.396-13.38-40.985-.259-81.367-11.206-116.879-31.713-22.922-13.231-43.254-30.04-60.569-50.039zM103.015 375.508c24.937 14.4 53.928 24.056 84.837 26.854-53.409-29.561-82.274-70.602-95.861-94.135-14.942-25.878-25.041-53.917-30.063-83.421-14.921.64-29.775 2.868-44.227 6.709-6.6 1.576-11.507 7.517-11.507 14.599 0 1.312.172 2.618.512 3.885 15.32 57.142 52.726 100.35 96.309 125.509zM324.148 402.362c30.908-2.799 59.9-12.454 84.837-26.854 43.583-25.159 80.989-68.367 96.31-125.508.34-1.267.512-2.573.512-3.885 0-7.082-4.907-13.023-11.507-14.599-14.452-3.841-29.306-6.07-44.227-6.709-5.022 29.504-15.121 57.543-30.063 83.421-13.588 23.533-42.419 64.554-95.862 94.134zM187.301 366.948c-15.157-24.483-38.696-71.48-38.696-135.903 0-32.646 6.043-64.401 17.945-94.529-16.394-9.351-33.972-16.623-52.273-21.525-8.004-2.142-16.225 2.604-18.37 10.605-16.372 61.078-4.825 121.063 22.064 167.631 16.325 28.275 39.769 54.111 69.33 73.721zM324.684 366.957c29.568-19.611 53.017-45.451 69.344-73.73 26.889-46.569 38.436-106.553 22.064-167.631-2.145-8.001-10.366-12.748-18.37-10.605-18.304 4.902-35.883 12.176-52.279 21.529 11.9 30.126 17.943 61.88 17.943 94.525.001 64.478-23.58 111.488-38.702 135.912zM266.606 69.813c-2.813-2.813-6.637-4.394-10.615-4.394a15 15 0 00-10.606 4.394c-39.289 39.289-66.78 96.005-66.78 161.231 0 65.256 27.522 121.974 66.78 161.231 2.813 2.813 6.637 4.394 10.615 4.394s7.793-1.581 10.606-4.394c39.248-39.247 66.78-95.96 66.78-161.231.001-65.256-27.511-121.964-66.78-161.231z"
-                />
-              </svg>
+    <title>Gerenciar Produto - EstoqueHub</title>
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/dashboardProduto.css">
+    <link rel="stylesheet" href="../assets/css/mobile-menu.css">
+</head>
+
+<body>
+    <!-- Dentro do header -->
+    <header class="header">
+        <div class="logo-container">
+            <a href="/" class="logo">
+                <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" width="150" height="40">
+                    <!-- Fundo do logo -->
+                    <rect x="10" y="15" width="50" height="50" rx="8" fill="#3498db" />
+
+                    <!-- Elementos de estoque (caixas) -->
+                    <rect x="20" y="25" width="15" height="15" rx="2" fill="white" opacity="0.9" />
+                    <rect x="35" y="40" width="15" height="15" rx="2" fill="white" opacity="0.9" />
+                    <rect x="20" y="40" width="15" height="15" rx="2" fill="white" opacity="0.7" />
+
+                    <!-- Nome da empresa -->
+                    <text x="70" y="50" font-family="Segoe UI, sans-serif" font-size="28" font-weight="bold"
+                        fill="#333333">
+                        <tspan fill="#3498db">Estoque</tspan>
+                        <tspan fill="#2c3e50">Hub</tspan>
+                    </text>
+
+                    <!-- Slogan opcional -->
+                    <text x="70" y="65" font-family="Segoe UI, sans-serif" font-size="12" fill="#7f8c8d">Gestão de
+                        estoque simplificada</text>
+                </svg>
             </a>
-          </div>
         </div>
-        <ul class="sidebar-list">
-          <li class="sidebar-list-item">
-            <a href="/dashboard">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-home"
-              >
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-              </svg>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li class="sidebar-list-item active">
-            <a href="/dashboardAdicionarProduto">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-shopping-bag"
-              >
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
-              <span id="acao-prod-span">Adicionar Produto</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+        <nav class="menu-desk">
+            <a class="normal-button" href="/dashboardAdicionarProduto">Adicionar Produto</a>
+            <form action="/logout" method="post">
+                <a href="javascript:;" onclick="this.parentNode.submit()">Sair</a>
+            </form>
+        </nav>
 
-      <div class="app-content">
-        <div class="app-content-header">
-          <h1 id="acao-prod-title" class="app-content-headerText">Adicionar Produto</h1>
-          <form action="/logout" method="post">
-              <button type="submit" class="app-content-headerButton">Sair</button>
-          </form>
+        <!-- Botão do menu mobile -->
+        <button id="mobile-menu-toggle" class="hamburger-button" aria-label="Abrir menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect y="4" width="24" height="2" fill="black" />
+                <rect y="11" width="24" height="2" fill="black" />
+                <rect y="18" width="24" height="2" fill="black" />
+            </svg>
+        </button>
+    </header>
+
+    <!-- Menu lateral para mobile -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" width="150" height="40">
+                <!-- Fundo do logo -->
+                <rect x="10" y="15" width="50" height="50" rx="8" fill="#3498db" />
+
+                <!-- Elementos de estoque (caixas) -->
+                <rect x="20" y="25" width="15" height="15" rx="2" fill="white" opacity="0.9" />
+                <rect x="35" y="40" width="15" height="15" rx="2" fill="white" opacity="0.9" />
+                <rect x="20" y="40" width="15" height="15" rx="2" fill="white" opacity="0.7" />
+
+                <!-- Nome da empresa -->
+                <text x="70" y="50" font-family="Segoe UI, sans-serif" font-size="28" font-weight="bold" fill="#333333">
+                    <tspan fill="#3498db">Estoque</tspan>
+                    <tspan fill="#2c3e50">Hub</tspan>
+                </text>
+
+                <!-- Slogan opcional -->
+                <text x="70" y="65" font-family="Segoe UI, sans-serif" font-size="12" fill="#7f8c8d">Gestão de
+                    estoque simplificada</text>
+            </svg>
+            <button id="mobile-menu-close" class="close-button" aria-label="Fechar menu">&times;</button>
         </div>
-        <div class="app-content-actions"></div>
-
-        <div class="products-area-wrapper tableView">
-            <div class="agenda-form">
-
-                <div class="wrapper">
-                    <form id="agenda-form" action="/dashboardAdicionarProduto" method="post">
-                        <input type="hidden" id="fprodId" name="fprodId">
-                        <div class="nice-form-group">
-                            <small class="error-message"><%= msgError %></small>
-                        </div>
-                        <div class="nice-form-group">
-                            <label for="fprodNome">Nome do produto: *</label>
-                            <input type="text" id="fprodNome" name="fprodNome" required />
-                        </div>
-
-                        <div class="nice-form-group">
-                            <label for="fprodDesc">Descrição do produto: *</label>
-                            <textarea name="fprodDesc" id="fprodDesc" rows="3"></textarea>
-                        </div>
-
-                        <div class="nice-form-group">
-                            <label for="fprodPreco">Preço unitário: *</label>
-                            <input type="text" id="fprodPreco" name="fprodPreco" required />
-                        </div>
-
-                        <div class="nice-form-group">
-                            <label for="fprodQtd">Quantidade: *</label>
-                            <input type="number" id="fprodQtd" name="fprodQtd" required />
-                        </div>
-
-                        <div class="input-box button">
-                            <input id="btnSubmit" type="submit" value="Adicionar">
-                        </div>
-                    </form>
-                </div>
-
+        <nav class="mobile-menu-links">
+            <a href="/dashboardAdicionarProduto" >Adicionar Produto</a>
+            <form action="/logout" method="post">
+                <a href="javascript:;" onclick="this.parentNode.submit()">Sair</a>
+            </form>
+        </nav>
+        <div class="mobile-menu-footer">
+            <p>Contato: <a href="mailto:contato@estoquehub.com">contato@estoquehub.com</a></p>
+            <div class="mobile-socials">
+                <a href="https://wa.me/5500000000000" target="_blank" aria-label="WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 90 90">
+                        <path id="WhatsApp" fill="#ffffff"
+                            d="M90,43.841c0,24.213-19.779,43.841-44.182,43.841c-7.747,0-15.025-1.98-21.357-5.455L0,90l7.975-23.522   c-4.023-6.606-6.34-14.354-6.34-22.637C1.635,19.628,21.416,0,45.818,0C70.223,0,90,19.628,90,43.841z M45.818,6.982   c-20.484,0-37.146,16.535-37.146,36.859c0,8.065,2.629,15.534,7.076,21.61L11.107,79.14l14.275-4.537   c5.865,3.851,12.891,6.097,20.437,6.097c20.481,0,37.146-16.533,37.146-36.857S66.301,6.982,45.818,6.982z M68.129,53.938   c-0.273-0.447-0.994-0.717-2.076-1.254c-1.084-0.537-6.41-3.138-7.4-3.495c-0.993-0.358-1.717-0.538-2.438,0.537   c-0.721,1.076-2.797,3.495-3.43,4.212c-0.632,0.719-1.263,0.809-2.347,0.271c-1.082-0.537-4.571-1.673-8.708-5.333   c-3.219-2.848-5.393-6.364-6.025-7.441c-0.631-1.075-0.066-1.656,0.475-2.191c0.488-0.482,1.084-1.255,1.625-1.882   c0.543-0.628,0.723-1.075,1.082-1.793c0.363-0.717,0.182-1.344-0.09-1.883c-0.27-0.537-2.438-5.825-3.34-7.977   c-0.902-2.15-1.803-1.792-2.436-1.792c-0.631,0-1.354-0.09-2.076-0.09c-0.722,0-1.896,0.269-2.889,1.344   c-0.992,1.076-3.789,3.676-3.789,8.963c0,5.288,3.879,10.397,4.422,11.113c0.541,0.716,7.49,11.92,18.5,16.223   C58.2,65.771,58.2,64.336,60.186,64.156c1.984-0.179,6.406-2.599,7.312-5.107C68.398,56.537,68.398,54.386,68.129,53.938z" />
+                    </svg>
+                </a>
+                <a href="https://t.me/seucanal" target="_blank" aria-label="Telegram">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#ffffff">
+                        <path
+                            d="M9.03 16.69l-.39 3.68c.56 0 .8-.24 1.09-.52l2.61-2.48 5.41 3.95c.99.55 1.69.26 1.95-.92L22.94 4.2c.33-1.5-.55-2.1-1.49-1.77L2.37 9.51c-1.43.55-1.41 1.34-.26 1.7l5.74 1.79 13.32-8.39-11.14 10.95z" />
+                    </svg>
+                </a>
+                <a href="https://instagram.com/seuusuario" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#ffffff">
+                        <path
+                            d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-2a1 1 0 100 2 1 1 0 000-2z" />
+                    </svg>
+                </a>
             </div>
         </div>
+    </div>
 
-      </div>
+    <div class="layout">
+        <!-- Aside -->
+        <aside class="aside">
+            <nav>
+                <ul>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a class="active" href="/dashboardAdicionarProduto">Produtos</a></li>
+                    <li><a href="/dashboardConfiguracao">Configuração</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="form-container">
+                <form action="/dashboardAdicionarProduto" method="post" class="geral-form" id="productForm">
+                    <input type="hidden" id="fprodId" name="fprodId">
+                    <h2 id="acao-prod-title" style="margin-bottom: 1.5rem;">Adicionar Produto</h2>
+
+                    <% if (msgError != "") { %>
+                        <aside class="obrigatorio-alerta">
+                            &#10071; <%= msgError %>
+                        </aside>
+                    <% } %>
+
+                    <div class="form-group">
+                        <label for="fprodNome">Nome do produto *</label>
+                        <input type="text" id="fprodNome" name="fprodNome" placeholder="Digite o nome do produto" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fprodDesc">Descrição *</label>
+                        <input type="text" id="fprodDesc" name="fprodDesc" placeholder="Descreva o produto" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fprodPreco">Preço unidade *</label>
+                        <input type="text" id="fprodPreco" name="fprodPreco" placeholder="Ex: 19.99" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fprodQtd">Quantidade *</label>
+                        <input type="number" id="fprodQtd" name="fprodQtd" min="0" placeholder="Ex: 100" required>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="form-actions">
+                        <a href="/dashboard" class="normal-button-sair">Cancelar</a>
+                        <input id="btnSubmit" type="submit" class="normal-button" value="Inserir"/>
+                    </div>
+                </form>
+            </div>
+        </main>
 
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
           const item = JSON.parse('<%- JSON.stringify(item) %>');
@@ -139,7 +177,6 @@
               document.getElementById('fprodQtd').value = item.CDESTQTDPROD;
               document.getElementById('btnSubmit').value = "Editar";
               document.getElementById('acao-prod-title').innerHTML = "Editar Produto";
-              document.getElementById('acao-prod-span').innerHTML = "Editar Produto";
           }
 
           precoInput.addEventListener('input', function(e) {
@@ -158,5 +195,7 @@
         })
     </script>
     <script src="utils/global.js"></script>
-  </body>
+
+</body>
+
 </html>

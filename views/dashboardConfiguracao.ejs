@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard - EstoqueHub</title>
+    <title>Configuração - EstoqueHub</title>
     <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/css/dashboardIndex.css">
+    <link rel="stylesheet" href="../assets/css/dashboardConfig.css" />
     <link rel="stylesheet" href="../assets/css/mobile-menu.css">
+    <script src="../scripts/main.js"></script>
 </head>
 
 <body>
-    <!-- Dentro do header -->
     <header class="header">
         <div class="logo-container">
-            <a href="/" class="logo">
+            <a href="index.html" class="logo">
                 <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" width="150" height="40">
                     <!-- Fundo do logo -->
                     <rect x="10" y="15" width="50" height="50" rx="8" fill="#3498db" />
@@ -38,10 +38,8 @@
             </a>
         </div>
         <nav class="menu-desk">
-            <a class="normal-button" href="/dashboardAdicionarProduto">Adicionar Produto</a>
-            <form action="/logout" method="post">
-                <a href="javascript:;" onclick="this.parentNode.submit()">Sair</a>
-            </form>
+            <a class="normal-button" href="#">Adicionar Produto</a>
+            <a href="#" class="">Sair</a>
         </nav>
 
         <!-- Botão do menu mobile -->
@@ -53,8 +51,6 @@
             </svg>
         </button>
     </header>
-
-
 
     <!-- Menu lateral para mobile -->
     <div id="mobile-menu" class="mobile-menu">
@@ -81,10 +77,9 @@
             <button id="mobile-menu-close" class="close-button" aria-label="Fechar menu">&times;</button>
         </div>
         <nav class="mobile-menu-links">
-            <a href="/dashboardAdicionarProduto" class="active">Adicionar Produto</a> <!-- NOVO -->
-            <form action="/logout" method="post">
-                <a href="javascript:;" onclick="this.parentNode.submit()">Sair</a>
-            </form>
+            <a href="#services" class="active">Serviços</a>
+            <a href="#" class="active">Adicionar Produto</a> <!-- NOVO -->
+            <a href="#" class="active">Sair</a> <!-- NOVO -->
         </nav>
         <div class="mobile-menu-footer">
             <p>Contato: <a href="mailto:contato@estoquehub.com">contato@estoquehub.com</a></p>
@@ -110,141 +105,91 @@
             </div>
         </div>
     </div>
-    <div class="layout">
 
-        <!-- Aside -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Estrutura de layout consistente com o dashboardIndex -->
+    <div class="layout">
+        <!-- Aside com menu de navegação (igual ao index) -->
         <aside class="aside">
             <nav>
                 <ul>
-                    <li><a class="active" href="/dashboard">Dashboard</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/dashboardAdicionarProduto">Produtos</a></li>
-                    <li><a href="/dashboardConfiguracao">Configuração</a></li>
+                    <li><a class="active" href="/dashboardConfiguracao">Configuração</a></li>
                 </ul>
             </nav>
         </aside>
 
         <!-- Conteúdo principal -->
         <main class="main-content">
+            <!-- Formulários de configuração -->
+            <div class="form-container">
+                <form action="/dashboardConfiguracaoDados" method="post" class="geral-form">
+                    <h2>Seu perfil</h2>
 
-            <!-- Filtros -->
-            <form action="/dashboard" method="post">
-                <div class="filtros">
-                    <select id="fopcoes" name="fopcoes" class="opcoes">
-                        <option value="0">Selecione</option>
-                        <option value="1">Nome</option>
-                        <option value="2">Descrição</option>
-                        <option value="3">Preço Unitário</option>
-                        <option value="4">Quantidade</option>
-                    </select>
-                    <input type="text" id="fbusca" name="fbusca" class="busca" placeholder="Busca" />
-                    <button class="normal-button">Filtrar</button>
-                </div>
-            </form>
+                    <% if (msgErrorDado !== null) { %>
+                        <aside class="obrigatorio-alerta">
+                            &#10071; <%= msgErrorDado %>
+                        </aside>
+                    <% } %>
+                    <div class="form-group full-width">
+                        <label for="fnome">Nome *</label>
+                        <input type="text" id="fnome" name="fnome" required placeholder="Digite seu nome" />
+                    </div>
 
-            <!-- Tabela -->
-            <div class="tabela-container">
-                <table class="tabela">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Descrição</th>
-                            <th>Preço Unitário</th>
-                            <th>Quantidade</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% if (itens.length !== 0) { %>
-                            <% itens.forEach(element => { %>
-                                <tr>
+                    <div class="form-group full-width">
+                        <label for="femail">E-mail *</label>
+                        <input type="email" id="femail" name="femail" required placeholder="exemplo@gmail.com" readonly
+                            class="campo-readonly" />
+                    </div>
 
-                                    <td><%= element.CDPRODNOME %></td>
-                                    <td><%= element.CDPRODDESC %></td>
-                                    <td><%= element.CDPRODPRECO %></td>
-                                    <td><%= element.CDESTQTDPROD %></td>
-                                    <td>
-                                        <a href="/dashboardEditarProduto?produtoId=<%=element.CDPRODID%>">Editar</a>
-                                        <a href="/dashboardDeletarProduto?produtoId=<%=element.CDPRODID%>">Deletar</a>
-                                    </td>
+                    <div class="form-group full-width">
+                        <label for="ftelefone">Telefone:</label>
+                        <input type="text" id="ftelefone" name="ftelefone" placeholder="(11) 11111-1111" maxlength="15"
+                            required/>
+                    </div>
 
-                                </tr>
-                            <% }); %>
-                        <% } else { %>
-                            <tr>
-                                <td>Nenhum item encontrado...</td>
-                            </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                    <input type="submit" class="normal-button perfil-button" value="Atualizar Dados"/>
+                </form>
+
+                <form action="/dashboardConfiguracaoSenha" method="post" class="geral-form">
+                    <h2>Mude sua senha</h2>
+                    <% if (msgErrorSenha !== null) { %>
+                        <aside class="obrigatorio-alerta">
+                            &#10071; <%= msgErrorSenha %>
+                        </aside>
+                    <% } %>
+                    <div class="form-group-senha">
+                        <div class="form-group full-width">
+                            <label for="fsenha">Nova senha *</label>
+                            <input type="password" id="fsenha" name="fsenha" required
+                                placeholder="Digite sua nova senha" />
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="fconfirmar">Confirme sua senha *</label>
+                            <input type="password" id="fconfirmar" name="fconfirmar" required
+                                placeholder="Confirmar senha" />
+                        </div>
+                    </div>
+
+                    <input type="submit" class="normal-button perfil-button" value="Atualizar Senha"/>
+                </form>
             </div>
-
-            <!-- Paginação -->
-            <div class="paginacao">
-                <% if (paginaAtual > 1) { %>
-                    <a href="/dashboard?pagina=<%= paginaAtual - 1 %>" class="normal-button">&laquo; Voltar</a>
-                <% } else { %>
-                    <!-- <a href="#" class="normal-button"></a> -->
-                <% } %>
-
-                <span>Página <%= paginaAtual %></span>
-
-                <% if (paginaAtual < totalPaginas) { %>
-                    <a href="/dashboard?pagina=<%= paginaAtual + 1 %>" class="normal-button">&raquo; Próximo</a>
-                <% } else { %>
-                    <!-- <a href="#" class="normal-button"></a> -->
-                <% } %>
-            </div>
-
         </main>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const selectOpcao = document.getElementById('fopcoes');
-            const campoBusca  = document.getElementById('fbusca');
+          const item = JSON.parse('<%- JSON.stringify(item) %>');
 
-            function formataValorFLoat(e) {
-                // Remove tudo que não for número usando regex
-                let valor = e.target.value.replace(/\D/g, '');
-
-                // Limita a 10 dígitos
-                valor = valor.substring(0, 10);
-
-                // Separa parte inteira e decimal usando regex
-                const regex = /^(\d+)(\d{2})$/;
-                valor = valor.replace(regex, '$1,$2');
-
-                e.target.value = valor;
-            }
-
-            function formataValorInt(e) {
-                // Remove tudo que não for número usando regex
-                let valor = e.target.value.replace(/\D/g, '');
-
-                valor = valor.substring(0, 10);
-
-                e.target.value = valor;
-            }
-
-            selectOpcao.addEventListener('change', (event) => {
-                campoBusca.value = '';
-                const opcaoSelecionada = event.target.value;
-
-                switch (opcaoSelecionada) {
-                    case '1':
-                    case '2':
-                        campoBusca.removeEventListener('input', formataValorFLoat);
-                        campoBusca.removeEventListener('input', formataValorInt);
-                        break;
-                    case '3':
-                        campoBusca.addEventListener('input', formataValorFLoat);
-                        break;
-                    case '4':
-                        campoBusca.addEventListener('input', formataValorInt);
-                        break;
-                }
-            });
-
-        });
+          if (Object.keys(item).length != 0) {
+              document.getElementById('fnome').value = item.CDUSNOME;
+              document.getElementById('femail').value = item.CDUSEMAIL;
+              document.getElementById('ftelefone').value = item.CDUSCEL;
+          }
+        })
     </script>
     <script src="utils/global.js"></script>
 </body>

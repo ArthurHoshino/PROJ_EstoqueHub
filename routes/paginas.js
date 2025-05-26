@@ -1,10 +1,27 @@
 import express from 'express'
 
-import { getUsuarioByEmail, createUsuario } from '../db/db-functions/usuarioDb.js'
+import { getUsuarioByEmail, createUsuario, getUsuarioById, updateUsuario } from '../db/db-functions/usuarioDb.js'
 import { getProdutosFiltro, inserirProduto, atualizarProduto, deletarProduto } from '../db/db-functions/produtoDb.js'
 import { adicionarProdutoEstoque, atualizarProdutoEstoque, deletarProdutoEstoque, getProdutoEstoque } from '../db/db-functions/estoqueDb.js'
+import { TabelasEnum } from '../src/enums/TabelasEnum.js';
+import { UsuarioEnum, getUsuarioEnum } from '../src/enums/UsuarioEnum.js';
+import { ProdutoEnum, getProdutoEnum } from '../src/enums/ProdutoEnum.js';
+import { EstoqueEnum, getEstoqueEnum } from '../src/enums/EstoqueEnum.js';
 
 const paginaRouter = express.Router()
+
+
+// <==============>
+// AUXILIARES
+// <==============>
+const validaSenha = (senha, confirma) => {
+    const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%& "]).{8,}$/;
+
+    if ((!passwordValidation.test(senha)) || (senha != confirma)) {
+        return false;
+    }
+    return true;
+}
 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
@@ -52,11 +69,13 @@ paginaRouter.get('/dashboard', redirectLogin, async (req, res) => {
 
     const result = await getProdutosFiltro(userId, pag, perPage, offset);
 
-    res.render('dashboard', {
+    const pageData = {
         itens: result.itens,
         paginaAtual: pag,
         totalPaginas: result.totalPaginas
-    })
+    }
+
+    res.render('dashboard', pageData)
 })
 
 paginaRouter.get('/dashboardAdicionarProduto', redirectLogin, async (req, res) => {
@@ -70,8 +89,8 @@ paginaRouter.get('/dashboardAdicionarProduto', redirectLogin, async (req, res) =
 
 paginaRouter.get('/dashboardEditarProduto', redirectLogin, async (req, res) => {
     const data = {
-        "CDUSID": req.session.userId,
-        "CDPRODID": req.query.produtoId
+        CDUSID: req.session.userId,
+        CDPRODID: req.query.produtoId
     }
 
     const result = await getProdutoEstoque(data);
@@ -95,6 +114,19 @@ paginaRouter.get('/dashboardDeletarProduto', redirectLogin, async (req, res) => 
 
     res.redirect('/dashboard');
 })
+
+paginaRouter.get('/dashboardConfiguracao', redirectLogin, async (req, res) => {
+    const userId = req.session.userId;
+    const usuario = await getUsuarioById(userId);
+
+    const data = {
+        item: usuario,
+        msgErrorDado: null,
+        msgErrorSenha: null
+    }
+
+    res.render('dashboardConfiguracao', data);
+});
 
 // <==============>
 // ROTAS POST
@@ -130,10 +162,10 @@ paginaRouter.post('/registro', async (req, res, next) => {
         const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%& "]).{8,}$/
         const errorMessage = {msgError: ''}
         const data = {
-            'CDUSNOME': req.body.fnome,
-            'CDUSEMAIL': req.body.femail,
-            'CDUSCEL': req.body.ftelefone != '' ? req.body.ftelefone : null,
-            'CDUSSENHA': req.body.fsenha
+            CDUSNOME: req.body.fnome,
+            CDUSEMAIL: req.body.femail,
+            CDUSCEL: req.body.ftelefone != '' ? req.body.ftelefone : null,
+            CDUSSENHA: req.body.fsenha
         }
 
         if (data.CDUSNOME == '') {
@@ -162,9 +194,33 @@ paginaRouter.post('/registro', async (req, res, next) => {
         res.status(500).send({message: 'Tente novamente mais tarde'})
         next(error)
     }
-})
+});
 
-paginaRouter.post('/dashboardAdicionarProduto', async (req, res, next) => {
+paginaRouter.post('/dashboard', redirectLogin, async (req, res) => {
+    if (req.body.fopcoes !== '' && req.body.fbusca !== '') {
+        const userId = req.session.userId;
+        const pag = parseInt(req.query.pagina) || 1;
+        const perPage = 7;
+        const offset = (pag - 1) * perPage;
+        const filtroOpt = req.body.fopcoes;
+        const filtroValor = req.body.fbusca;
+
+        const result = await getProdutosFiltro(userId, pag, perPage, offset, filtroOpt, filtroValor);
+
+        const pageData = {
+            itens: result.itens,
+            paginaAtual: pag,
+            totalPaginas: result.totalPaginas
+        }
+
+        res.render('dashboard', pageData);
+    } else {
+        res.redirect('/dashboard');
+    }
+
+});
+
+paginaRouter.post('/dashboardAdicionarProduto', redirectLogin, async (req, res, next) => {
     try {
         let errorMessage = {
             msgError: '',
@@ -172,15 +228,15 @@ paginaRouter.post('/dashboardAdicionarProduto', async (req, res, next) => {
         }
         const { userId } = req.session
         const prodData = {
-            "CDPRODID": req.body.fprodId,
-            "CDPRODNOME": req.body.fprodNome,
-            "CDPRODDESC": req.body.fprodDesc,
-            "CDPRODPRECO": req.body.fprodPreco
+            CDPRODID: req.body.fprodId,
+            CDPRODNOME: req.body.fprodNome,
+            CDPRODDESC: req.body.fprodDesc,
+            CDPRODPRECO: req.body.fprodPreco
         }
         const estoqueData = {
-            "CDUSID": userId,
-            "CDESTPRODID" : req.body.fprodId,
-            "CDESTQTDPROD": req.body.fprodQtd
+            CDUSID: userId,
+            CDESTPRODID : req.body.fprodId,
+            CDESTQTDPROD: req.body.fprodQtd
         }
 
         if (prodData.CDPRODNOME == '') {
@@ -221,6 +277,49 @@ paginaRouter.post('/dashboardAdicionarProduto', async (req, res, next) => {
         next(error)
     }
 })
+
+paginaRouter.post('/dashboardConfiguracaoDados', redirectLogin, async (req, res) => {
+    const userId = req.session.userId;
+    const usuario = await getUsuarioById(userId);
+
+    const pageData = {
+        item: usuario,
+        msgErrorDado: null,
+        msgErrorSenha: null
+    }
+    let data = {};
+
+    if (req.body.fnome == '') {
+        pageData.msgErrorDado = "Nome de usuário não pode ser vazio";
+        return res.render("dashboardAdicionarProduto", pageData);
+    }
+
+    for (let [k, v] of Object.entries(req.body)) {
+        data[getUsuarioEnum(k)] = v;
+    }
+
+    await updateUsuario(userId, data);
+
+    return res.redirect('/dashboard');
+});
+
+paginaRouter.post('/dashboardConfiguracaoSenha', redirectLogin, async (req, res) => {
+    const userId = req.session.userId;
+    const usuario = await getUsuarioById(userId);
+
+    const pageData = {
+        item: usuario,
+        msgErrorDado: null,
+        msgErrorSenha: null
+    }
+    if (validaSenha(req.body.fsenha, req.body.fconfirmar)) {
+        await updateUsuario(userId, {CDUSSENHA: req.body.fsenha});
+        return res.redirect('/dashboard');
+    } else {
+        pageData.msgErrorSenha = 'Ocorreu um erro no processamento dos dados';
+        return res.render('dashboardConfiguracao', pageData);
+    }
+});
 
 paginaRouter.post('/logout', redirectLogin, (req, res) => {
     req.session.destroy(err => {

@@ -4,9 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuClose = document.getElementById('mobile-menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
     const overlay = document.getElementById('overlay');
-    const nomeInput = document.getElementById('fnome');
-    const senhaInput = document.getElementById('fsenha');
-    const confirmarSenhaInput = document.getElementById('fconfirmar');
     const telefoneInput = document.getElementById("ftelefone");
 
     function openMenu() {
@@ -50,42 +47,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         e.target.value = value;
-    });
-
-    function formatarPrecoRegex(valor) {
-        // Remove tudo que não for número usando regex
-        valor = valor.replace(/\D/g, '');
-
-        // Limita a 10 dígitos
-        valor = valor.substring(0, 10);
-
-        // Separa parte inteira e decimal usando regex
-        const regex = /^(\d+)(\d{2})$/;
-        valor = valor.replace(regex, '$1,$2');
-
-        return valor;
-    }
-
-    function formatarSenhaRegex(valor) {
-        const regex = /^[^\s].*/;
-        if (regex.test(valor)) {
-            return valor;
-        }
-        return '';
-    }
-
-    nomeInput.addEventListener('input', function(e) {
-        let valor = e.target.value.replace(/^[^\s].*/, '');
-        e.target.value = valor;
-    });
-
-    senhaInput.addEventListener('input', function(e) {
-        let valor = e.target.value.replace(/^[^\s].*/, '');
-        e.target.value = valor;
-    });
-
-    confirmarSenhaInput.addEventListener('input', (e) => {
-        let valorFormatado = formatarSenhaRegex(e.target.value);
-        e.target.value = valorFormatado;
     });
 });
