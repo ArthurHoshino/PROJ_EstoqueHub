@@ -150,6 +150,7 @@
                             <th>Descrição</th>
                             <th>Preço Unitário</th>
                             <th>Quantidade</th>
+                            <th>Valor Total do Estoque</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -162,6 +163,7 @@
                                     <td><%= element.CDPRODDESC %></td>
                                     <td><%= element.CDPRODPRECO %></td>
                                     <td><%= element.CDESTQTDPROD %></td>
+                                    <td><%= (element.CDPRODPRECO * element.CDESTQTDPROD) %></td>
                                     <td>
                                         <a href="/dashboardEditarProduto?produtoId=<%=element.CDPRODID%>">Editar</a>
                                         <a href="/dashboardDeletarProduto?produtoId=<%=element.CDPRODID%>">Deletar</a>
